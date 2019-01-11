@@ -1,5 +1,6 @@
 # nodejs-express
-nodejs express study 
+nodejs expressstudy 
+-- NODE Ver : v 8.11.2
 -- express 모듈을 이용한 간단한 웹 서버 만들기
 -- GET,POST 이용하기
 -- 사진
