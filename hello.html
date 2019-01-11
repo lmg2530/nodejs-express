@@ -1,0 +1,47 @@
+<html>
+	<head>
+		<script>
+			function callPost(callback) {
+				var data = document.getElementById('No1').value;
+
+				var fd = new Object()
+				fd.data_text = data;
+
+				var xhr = new XMLHttpRequest();
+				 if (callback) {
+					xhr.upload.addEventListener('progress', function (e) {
+                        callback('uploading', e);
+                    }, false);
+                    xhr.addEventListener('load', function (e) {
+                        callback('ok', e);
+                    }, false);
+                    xhr.addEventListener('error', function (e) {
+                        callback('error', e);
+                    }, false);
+                    xhr.addEventListener('abort', function (e) {
+                        callback('cancel', e);
+                    }, false);
+                }
+				 xhr.open('POST', 'http://localhost:3000/hello');
+				 xhr.setRequestHeader("Content-Type", 'application/json');
+				 xhr.responseType = 'text';
+
+                xhr.onreadystatechange = function() { // 수신값 처리
+   				 if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+        				var data_varse = xhr.responseText;
+                        alert(data_varse)
+				    }
+				}
+                xhr.send(JSON.stringify(fd)); //송신 값 처리 
+			}
+		</script>
+	</head>
+	<body>
+		<h1>Hello Node Express~~^^</h1>
+		<div>
+			<input type="text" id="No1" >
+			<input type="button" onclick="callPost()" value="send">
+		</div>
+		<div id="res"></div>
+	</body>
+</html>
